@@ -1,0 +1,67 @@
+<div class="card">
+  <div class="card-header">
+      <h5 *ngIf="isEdit">{{'ACTION.UPDATE'| translate }} </h5>
+      <h5 *ngIf="!isEdit">{{'ACTION.ADD'| translate }}</h5>
+      
+  </div>
+  <div class="card-block" style="margin: 1rem;">
+      
+      <form  [formGroup]="courForm" (ngSubmit)="save()">
+          <div class="form-group row">
+              <label class="col-sm-2 col-form-label">{{'COURSE.NAME'| translate }}</label>
+              <div class="col-sm-10">
+                  <input type="text" formControlName="name" class="form-control">
+              </div>
+          </div>
+         
+    
+      
+        <div class="form-group row">
+          <label class="col-sm-2 col-form-label">{{'COURSE.MODULE'| translate }}</label>
+          <div class="col-sm-10">
+            <select name="select" (change)="onSelectModule()" [compareWith]="compareModule" name="module"  formControlName="module" class="form-control">
+              <option value="opt1">{{'COURSE.SELECT_MODULE'| translate }}</option>
+              <option *ngFor="let module of listModule" [ngValue]="module" >
+                {{module.name}}  
+              </option>
+            </select>
+
+           
+          </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">{{'COURSE.QUIZ'| translate }}</label>
+        <div class="col-sm-10">
+          <select name="select" [compareWith]="compareQuiz" name="quiz"  formControlName="quiz" class="form-control">
+            <option value="opt1">{{'COURSE.SELECT_QUIZ'| translate }}</option>
+            <option *ngFor="let quiz of listQuiz" [ngValue]="quiz" >
+              {{quiz.name}}  
+            </option>
+          </select>
+
+         
+        </div>
+    </div>
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Content</label>
+        <div class="col-sm-10">
+          <angular-editor [placeholder]="'Enter text here...'" formControlName="content"></angular-editor>
+        
+        </div>
+    </div>
+
+      <div class="form-group row justify-content-center">
+        <button type="button" style="margin-right: 20px"  type="submit" [disabled]="isSaved"
+          class="btn btn-success btn-md waves-effect waves-light">
+          <i class="fa fa-check"></i>{{'ACTION.SAVE'| translate }}
+        </button>
+        <button type="button" (click)="cancel()" class="btn btn-danger btn-md waves-effect waves-light">
+          <i class="fa fa-close"></i>{{'ACTION.CANCEL'| translate }}
+        </button>
+      </div>
+         
+      </form>
+    
+     
+  </div>
+</div>

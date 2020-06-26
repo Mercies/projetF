@@ -1,0 +1,16 @@
+.mat-stepper-horizontal {
+    margin-top: 8px;
+  }
+  
+  .mat-form-field {
+    margin-top: 16px;
+  }
+  .mat-checkbox {
+    color: rgb(0,178,0)!important;
+    
+    }
+
+        .mat-ink-ripple{
+            background-color: rgba(0, 178, 0, .26);
+        }
+    
