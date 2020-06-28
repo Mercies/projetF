@@ -125,10 +125,12 @@ export class ListComponent implements OnInit {
   searchByCritere(demande: Demande<User>) {
     console.log("demandeUser --------", demande);
     this.userService.searchByCritere(demande).subscribe((resp: any) => {
-      console.log("users from database afak ---------------", resp);
+    if(resp!=null){
       this.resultsLength = resp.count;
       this.dataSource = new MatTableDataSource<User>(resp.lignes);
       this.paginator.pageIndex = demande.page;
+    }
+     
     });
   }
   initPagination() {

@@ -3,6 +3,7 @@ import { CrudService } from "../crud/crud.service";
 import { HttpClient } from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
 import { User } from "../../models/user.model";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root"
@@ -27,4 +28,7 @@ export class UserService {
   delete(id) {
     return this.httpClient.delete(this.url + "/delete/" + id);
   }
+  timeOfBlock(email: String): Observable<any> {
+    return this.httpClient.post(this.url+"/timeOfBlock", email);
+}
 }

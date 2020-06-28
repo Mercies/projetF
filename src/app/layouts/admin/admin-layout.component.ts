@@ -7,6 +7,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalService } from '../../core/services/local/local.service';
 import { AuthenticationService } from '../../core/services/authentication/authentication.service';
 import { TokenStorageService } from '../../core/services/token_storage/token-storage.service';
+import { Router } from '@angular/router';
 
 export interface Options {
   heading?: string;
@@ -76,7 +77,7 @@ export class AdminLayoutComponent implements OnInit {
 
   lang;
   fullName: string;
-  constructor(public menuItems: MenuItems,private translate: TranslateService,private localeService: LocalService,private authenticasionService:AuthenticationService,private tokenStorageService:TokenStorageService) {
+  constructor(public menuItems: MenuItems,private translate: TranslateService,private localeService: LocalService,private authenticasionService:AuthenticationService,private tokenStorageService:TokenStorageService,  private router: Router) {
     const scrollHeight = window.screen.height - 150;
     this.innerHeight = scrollHeight + 'px';
     this.windowWidth = window.innerWidth;
@@ -178,7 +179,10 @@ export class AdminLayoutComponent implements OnInit {
     this.isScrolled = false;
   }
   logout(){
-    this.authenticasionService.logout();
+    this.authenticasionService.logout().subscribe(resp=>{
+      localStorage.clear();
+      this.router.navigate(['login']);
+    });
 
   }
 }
